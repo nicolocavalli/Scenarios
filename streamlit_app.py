@@ -11,7 +11,7 @@ boost_amount = st.sidebar.number_input("Annual Immigration Boost", min_value=0, 
 # --- Load Data ---
 @st.cache_data
 def load_data():
-    boost_df = pd.read_csv("Youth_Boost_Weight_Applied.csv")
+    boost_df = pd.read_csv("Youth_Boost_Weights_Applied.csv")
     no_imm_df = pd.read_csv("Population_Data_with_Yearly_Immigration_Columns.csv")
     return boost_df, no_imm_df
 
