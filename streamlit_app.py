@@ -62,7 +62,7 @@ def run_projection(boost_start, boost_end, boost_amount, base_df):
 proj_df = run_projection(boost_start, boost_end, boost_amount, base_projection)
 
 st.subheader("Total Population Over Time")
-years = list(range(2024, 2076))
+years = list(range(2025, 2076))
 
 def total_pop(df):
     return [
