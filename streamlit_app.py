@@ -20,7 +20,7 @@ boost_df, no_immigration_df = load_data()
 # --- Projection Engine ---
 def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
-    years = list(range(2025, 2076))
+    years = list(range(2024, 2076))
     sex_ratio_at_birth = 0.512
 
     for year in years:
@@ -36,11 +36,11 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
             projections[f"{year}_Maschi_stranieri"] += boost_amount * wm
             projections[f"{year}_Femmine_straniere"] += boost_amount * wf
 
-        for group in ["Maschi_stranieri", "Femmine_stranieri"]:
+        for group in ["Maschi_stranieri", "Femmine_straniere"]:
             s_col = "Male_survival" if "Maschi" in group else "Female_survival"
             projections[f"{next_year}_{group}"] = projections[f"{year}_{group}"] * projections[s_col]
 
-        for group in ["Maschi_stranieri", "Femmine_stranieri"]:
+        for group in ["Maschi_stranieri", "Femmine_straniere"]:
             s_col = "Male_survival" if "Maschi" in group else "Female_survival"
             projections.loc[projections.index[1:], f"{next_year}_{group}"] = (
                 projections.loc[projections.index[:-1], f"{next_year}_{group}"].values
@@ -56,7 +56,7 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
         projections.loc[projections["Età"] == 0, f"{next_year}_Maschi_stranieri"] = births * sex_ratio_at_birth
         projections.loc[projections["Età"] == 0, f"{next_year}_Femmine_straniere"] = births * (1 - sex_ratio_at_birth)
 
-        for col in [f"{next_year}_Maschi_stranieri", f"{next_year}_Femmine_stranieri"]:
+        for col in [f"{next_year}_Maschi_stranieri", f"{next_year}_Femmine_straniere"]:
             projections[col] = projections[col].round().astype(int)
 
     return projections
