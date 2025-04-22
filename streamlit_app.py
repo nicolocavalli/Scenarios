@@ -123,8 +123,8 @@ total_boosted_f = baseline_f + boost_f
 fig2, ax2 = plt.subplots(figsize=(8, 6))
 ax2.barh(età, -baseline_m, color="lightgray", label="Baseline M")
 ax2.barh(età, baseline_f, color="gray", label="Baseline F")
-ax2.barh(età, -total_boosted_m, color="blue", alpha=0.6, label="Boosted M")
-ax2.barh(età, total_boosted_f, color="red", alpha=0.6, label="Boosted F")
+ax2.barh(età, -total_boosted_m, color="blue", alpha=0.8, label="Boosted M")
+ax2.barh(età, total_boosted_f, color="red", alpha=0.8, label="Boosted F")
 
 ax2.set_xlabel("Population")
 ax2.set_ylabel("Age")
