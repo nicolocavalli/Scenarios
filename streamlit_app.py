@@ -100,3 +100,38 @@ ax.legend()
 ax.grid(True)
 st.pyplot(fig)
 
+
+# --- Plot: Population Pyramid in Final Year (e.g. 2075) ---
+st.subheader(f"Population Pyramid: {years[-1]} (Baseline vs Boosted Total)")
+
+final_year = years[-1]
+età = boost_df["Età"]
+
+# Baseline population (males + females)
+baseline_m = boost_df[f"{final_year}_Maschi_italiani"] + boost_df[f"{final_year}_Maschi_stranieri"]
+baseline_f = boost_df[f"{final_year}_Femmine_italiane"] + boost_df[f"{final_year}_Femmine_straniere"]
+
+# Boosted foreign population
+boost_m = boost_projection[f"{final_year}_Maschi_stranieri"]
+boost_f = boost_projection[f"{final_year}_Femmine_straniere"]
+
+# Total with boost
+total_boosted_m = baseline_m + boost_m
+total_boosted_f = baseline_f + boost_f
+
+# Plot
+fig2, ax2 = plt.subplots(figsize=(8, 6))
+ax2.barh(età, -baseline_m, color="lightgray", label="Baseline M")
+ax2.barh(età, baseline_f, color="gray", label="Baseline F")
+ax2.barh(età, -total_boosted_m, color="blue", alpha=0.6, label="Boosted M")
+ax2.barh(età, total_boosted_f, color="red", alpha=0.6, label="Boosted F")
+
+ax2.set_xlabel("Population")
+ax2.set_ylabel("Age")
+ax2.set_title(f"Population Pyramid in {final_year}: Baseline vs Boosted")
+ax2.legend(loc="lower right")
+ax2.grid(True)
+
+st.pyplot(fig2)
+
+
