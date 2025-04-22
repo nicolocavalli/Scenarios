@@ -20,7 +20,7 @@ boost_df, no_immigration_df = load_data()
 # --- Projection Engine ---
 def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
-    years = list(range(2024, 2076))
+    years = list(range(2025, 2076))
     sex_ratio_at_birth = 0.512
 
     for year in years:
