@@ -4,13 +4,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# CONFIG
 st.set_page_config(page_title="Population Projections", layout="centered")
-
-# Title
 st.title("Immigration Boost Projections for Italy")
 
-# Load baseline and boost-ready datasets
 @st.cache_data
 def load_data():
     baseline = pd.read_csv("Population_Data_with_Yearly_Immigration_Columns.csv")
@@ -19,13 +15,11 @@ def load_data():
 
 baseline_df, base_projection = load_data()
 
-# Sidebar controls
 st.sidebar.header("Set Immigration Boost Parameters")
 boost_start = st.sidebar.slider("Start Year", min_value=2025, max_value=2070, value=2026)
 boost_end = st.sidebar.slider("End Year", min_value=2025, max_value=2075, value=2035)
 boost_amount = st.sidebar.number_input("Immigrants per Year", min_value=0, value=200000, step=50000)
 
-# Run projection
 def run_projection(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
     sex_ratio_at_birth = 0.512
@@ -36,7 +30,7 @@ def run_projection(boost_start, boost_end, boost_amount, base_df):
 
         if boost_start <= year <= boost_end:
             wm = projections["immigration_boost1w_Maschi_stranieri"]
-            wf = projections["immigration_boost1w_Femmine_stranieri"]
+            wf = projections["immigration_boost1w_Femmine_straniere"]  # fixed column name
             projections[f"{year}_Maschi_stranieri"] += boost_amount * wm
             projections[f"{year}_Femmine_straniere"] += boost_amount * wf
 
@@ -65,10 +59,8 @@ def run_projection(boost_start, boost_end, boost_amount, base_df):
 
     return projections
 
-# Run the projection with selected parameters
 proj_df = run_projection(boost_start, boost_end, boost_amount, base_projection)
 
-# --- Plot 1: Total Population ---
 st.subheader("Total Population Over Time")
 years = list(range(2024, 2076))
 
@@ -92,7 +84,6 @@ ax1.grid(True)
 ax1.legend()
 st.pyplot(fig1)
 
-# --- Plot 2: Population Pyramid for 2075 ---
 st.subheader("Population Pyramid: Year 2075")
 
 age = proj_df["Età"]
@@ -111,7 +102,7 @@ ax2.fill_betweenx(age_np, pf, bf, where=(pf > bf), facecolor='red', alpha=0.3, l
 ax2.axvline(0, color='black', linewidth=0.5)
 ax2.set_xlabel("Popolazione")
 ax2.set_ylabel("Età")
-ax2.set_title(f"Piramide della popolazione (2075)")
+ax2.set_title("Piramide della popolazione (2075)")
 ax2.legend(loc="upper right")
 ax2.grid(True, axis='x', linestyle='--')
 st.pyplot(fig2)
