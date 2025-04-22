@@ -32,7 +32,7 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
 
         if boost_start <= year <= boost_end:
             wm = projections["immigration_boost1w_Maschi_stranieri"]
-            wf = projections["immigration_boost1w_Femmine_stranieri"]
+            wf = projections["immigration_boost1w_Femmine_straniere"]
             projections[f"{year}_Maschi_stranieri"] += boost_amount * wm
             projections[f"{year}_Femmine_straniere"] += boost_amount * wf
 
