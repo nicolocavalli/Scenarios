@@ -11,7 +11,7 @@ boost_amount = st.sidebar.number_input("Annual Immigration Boost", min_value=0, 
 # --- Load Data ---
 @st.cache_data
 def load_data():
-    boost_df = pd.read_csv("Final_Population_with_Boost_Weights_Cleaned_WithBoostWeights.csv")
+    boost_df = pd.read_csv("Youth_Boost_Weight_Applied.csv")
     no_imm_df = pd.read_csv("Population_Data_with_Yearly_Immigration_Columns.csv")
     return boost_df, no_imm_df
 
@@ -32,7 +32,7 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
 
         if boost_start <= year <= boost_end:
             wm = projections["immigration_boost1w_Maschi_stranieri"]
-            wf = projections["immigration_boost1w_Femmine_straniere"]
+            wf = projections["immigration_boost1w_Femmine_stranieri"]
             projections[f"{year}_Maschi_stranieri"] += boost_amount * wm
             projections[f"{year}_Femmine_straniere"] += boost_amount * wf
 
