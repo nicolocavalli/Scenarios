@@ -106,16 +106,16 @@ births_boosted = [
 ]
 
 # Plot
-fig3, ax3 = plt.subplots(figsize=(10, 5))
-ax3.plot(birth_years, births_baseline, label="Baseline", linestyle="--", color="black")
-ax3.plot(birth_years, births_boosted, label="With Immigration Boost", color="blue", linewidth=2)
-ax3.axvspan(boost_start, boost_end, color="blue", alpha=0.1, label="Boost Period")
-ax3.set_xlabel("Year")
-ax3.set_ylabel("Total Births")
-ax3.set_title("Total Annual Births: Baseline vs Boosted Scenario")
-ax3.legend()
-ax3.grid(True)
-st.pyplot(fig3)
+#fig3, ax3 = plt.subplots(figsize=(10, 5))
+#ax3.plot(birth_years, births_baseline, label="Baseline", linestyle="--", color="black")
+#ax3.plot(birth_years, births_boosted, label="With Immigration Boost", color="blue", linewidth=2)
+#ax3.axvspan(boost_start, boost_end, color="blue", alpha=0.1, label="Boost Period")
+#ax3.set_xlabel("Year")
+#ax3.set_ylabel("Total Births")
+#ax3.set_title("Total Annual Births: Baseline vs Boosted Scenario")
+#ax3.legend()
+#ax3.grid(True)
+#st.pyplot(fig3)
 
 
 # --- Plot: Total Population Over Time ---
