@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 # --- UI Sidebar ---
 st.sidebar.title("Immigration Boost Policy")
-boost_start = st.sidebar.number_input("Boost Start Year", min_value=2026, max_value=2070, value=2026, step=1)
-boost_end = st.sidebar.number_input("Boost End Year", min_value=2026, max_value=2075, value=2035, step=1)
+boost_start = st.sidebar.number_input("Boost Start Year", min_value=2025, max_value=2070, value=2026, step=1)
+boost_end = st.sidebar.number_input("Boost End Year", min_value=2025, max_value=2075, value=2035, step=1)
 boost_amount = st.sidebar.number_input("Annual Immigration Boost", min_value=0, value=200000, step=10000)
 
 # --- Load Data ---
@@ -20,7 +20,7 @@ boost_df, no_immigration_df = load_data()
 # --- Projection Engine ---
 def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
-    years = list(range(2026, 2076))
+    years = list(range(2025, 2076))
     sex_ratio_at_birth = 0.512
 
     for year in years:
@@ -63,7 +63,7 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
 
 # --- Totals Calculation ---
 def total_population(df):
-    years = list(range(2026, 2076))
+    years = list(range(2025, 2076))
     return [
         (df[f"{y}_Maschi_italiani"] + df[f"{y}_Femmine_italiane"] +
          df[f"{y}_Maschi_stranieri"] + df[f"{y}_Femmine_straniere"]).sum()
@@ -71,7 +71,7 @@ def total_population(df):
     ]
 
 def total_foreign_population(df):
-    years = list(range(2026, 2076))
+    years = list(range(2025, 2076))
     return [
         (df[f"{y}_Maschi_stranieri"] + df[f"{y}_Femmine_straniere"]).sum()
         for y in years
@@ -90,7 +90,7 @@ pop_boosted = [b + p for b, p in zip(pop_baseline, pop_boost)]
 # --- Plot: Total Births Over Time ---
 st.subheader("Total Births Per Year: Baseline vs Boosted Scenario")
 
-birth_years = list(range(2026, 2075))
+birth_years = list(range(2024, 2075))
 
 # Corrected births: combine existing births from baseline and additional from boost_projection
 births_baseline = [
@@ -106,16 +106,16 @@ births_boosted = [
 ]
 
 # Plot
-#fig3, ax3 = plt.subplots(figsize=(10, 5))
-#ax3.plot(birth_years, births_baseline, label="Baseline", linestyle="--", color="black")
-#ax3.plot(birth_years, births_boosted, label="With Immigration Boost", color="blue", linewidth=2)
-#ax3.axvspan(boost_start, boost_end, color="blue", alpha=0.1, label="Boost Period")
-#ax3.set_xlabel("Year")
-#ax3.set_ylabel("Total Births")
-#ax3.set_title("Total Annual Births: Baseline vs Boosted Scenario")
-#ax3.legend()
-#ax3.grid(True)
-#st.pyplot(fig3)
+fig3, ax3 = plt.subplots(figsize=(10, 5))
+ax3.plot(birth_years, births_baseline, label="Baseline", linestyle="--", color="black")
+ax3.plot(birth_years, births_boosted, label="With Immigration Boost", color="blue", linewidth=2)
+ax3.axvspan(boost_start, boost_end, color="blue", alpha=0.1, label="Boost Period")
+ax3.set_xlabel("Year")
+ax3.set_ylabel("Total Births")
+ax3.set_title("Total Annual Births: Baseline vs Boosted Scenario")
+ax3.legend()
+ax3.grid(True)
+st.pyplot(fig3)
 
 
 # --- Plot: Total Population Over Time ---
