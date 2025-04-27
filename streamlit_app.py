@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 # --- UI Sidebar ---
 st.sidebar.title("Immigration Boost Policy")
-boost_start = st.sidebar.number_input("Boost Start Year", min_value=2024, max_value=2070, value=2026, step=1)
-boost_end = st.sidebar.number_input("Boost End Year", min_value=2024, max_value=2075, value=2035, step=1)
+boost_start = st.sidebar.number_input("Boost Start Year", min_value=2026, max_value=2070, value=2026, step=1)
+boost_end = st.sidebar.number_input("Boost End Year", min_value=2026, max_value=2075, value=2035, step=1)
 boost_amount = st.sidebar.number_input("Annual Immigration Boost", min_value=0, value=200000, step=10000)
 
 # --- Load Data ---
@@ -20,7 +20,7 @@ boost_df, no_immigration_df = load_data()
 # --- Projection Engine ---
 def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
-    years = list(range(2024, 2076))
+    years = list(range(2025, 2076))
     sex_ratio_at_birth = 0.512
 
     for year in years:
