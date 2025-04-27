@@ -20,7 +20,7 @@ boost_df, no_immigration_df = load_data()
 # --- Projection Engine ---
 def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
     projections = base_df.copy()
-    years = list(range(2025, 2076))
+    years = list(range(2026, 2076))
     sex_ratio_at_birth = 0.512
 
     for year in years:
@@ -63,7 +63,7 @@ def simulate_boost_population(boost_start, boost_end, boost_amount, base_df):
 
 # --- Totals Calculation ---
 def total_population(df):
-    years = list(range(2025, 2076))
+    years = list(range(2026, 2076))
     return [
         (df[f"{y}_Maschi_italiani"] + df[f"{y}_Femmine_italiane"] +
          df[f"{y}_Maschi_stranieri"] + df[f"{y}_Femmine_straniere"]).sum()
@@ -71,14 +71,14 @@ def total_population(df):
     ]
 
 def total_foreign_population(df):
-    years = list(range(2025, 2076))
+    years = list(range(2026, 2076))
     return [
         (df[f"{y}_Maschi_stranieri"] + df[f"{y}_Femmine_straniere"]).sum()
         for y in years
     ]
 
 # --- Run Projection ---
-years = list(range(2025, 2076))
+years = list(range(2026, 2076))
 pop_baseline = total_population(boost_df)
 pop_no_immigration = total_population(no_immigration_df)
 
